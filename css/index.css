@@ -7762,7 +7762,7 @@ input#pic-link {
 
 /* heo 加载动画头像 */
 .loading-img {
-  background: url(https://tuchuang.voooe.cn/images/2023/01/02/avatar.webp)
+  background: url(/assets/head.jpg)
     no-repeat center center;
   background-size: cover;
 }
@@ -9505,7 +9505,7 @@ hr:before {
 }
 
 body {
-  background: url(https://xiranimg.com/%E6%9C%AC%E4%BA%BA%E4%BD%BF%E7%94%A8%E5%A3%81%E7%BA%B8/1.png) !important;
+  background: url(/assets/bj.png) !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
   background-size: cover !important;
