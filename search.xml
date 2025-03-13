@@ -4,33 +4,6 @@
   
     
     <entry>
-      <title>H96MAX系统重装教程</title>
-      <link href="/posts/c549160f.html"/>
-      <url>/posts/c549160f.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="🛠️-系统重装准备工作">🛠️ 系统重装准备工作</h2><div class="note info flat"><p>准备工具：</p><ul><li>准备&gt;=8g的U盘一个(也许不止一个，有些U盘识别不好时请更换U盘试下)</li><li>局域网 IP扫描工具</li><li>电脑SSH连接服务器工具 SecureCRT | MobaXterm</li><li>镜像烧录工具 usbit | Win32磁盘映像工具 | balenaEtcher (推荐使用balenaEtcher)</li></ul></div><div class="note primary flat"><p>以上所有文件下载地址: 【软件库 -&gt; 系统重装准备工具】</p></div><h2 id="💿-U盘启动盘镜像下载">💿 U盘启动盘镜像下载</h2><div class="tabs" id="image"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#image-1">注意事项</button></li><li class="tab"><button type="button" data-href="#image-2">下载地址</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="image-1"><ol><li>两种镜像都可以制作U盘启动盘，<strong>与你想要恢复的系统无关，随便选择一个即可</strong></li><li>下载文件后，请提前<strong>解压出img镜像</strong>文件备用</li></ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="image-2"><ul><li>Ubuntu镜像</li><li>下载地址: 【软件库 -&gt; U盘启动盘镜像】</li></ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div><h2 id="📥-下载系统镜像">📥 下载系统镜像</h2><div class="note warning flat"><p>下载的系统镜像<strong>无需解压</strong></p></div><p>下载相对应的系统镜像，下载地址: 【软件库 -&gt; 系统盘镜像】</p><h2 id="💽-制作U盘启动盘">💽 制作U盘启动盘</h2><details class="folding-tag" cyan><summary> 使用usbit(USB Image Tool)制作启动盘步骤 </summary>              <div class='content'>              <ol><li><p>插入大于8g的U盘(需要在windows上格式化，格式化格式NTFS/FAT均可，<strong>重要数据请提前保存</strong>)</p></li><li><p>按下图选择U盘图标<br><img src="/assets/updata/u%E7%9B%98.png" alt="u盘启动图片"></p></li><li><p>点击 <strong>Restore</strong>，选择下载好的系统启动盘镜像</p></li><li><p>选择下载好启动镜像img文件后确认，开始烧录U盘启动盘</p></li><li><p>烧录完成后，会弹出格式化，<strong>不要格式化，不要格式化，不要格式化</strong>，点击取消</p></li><li><p>退出U盘</p></li></ol>              </div>            </details><h2 id="🚀-插入U盘启动盘启动进入U盘系统">🚀 插入U盘启动盘启动进入U盘系统</h2><details class="folding-tag" cyan><summary> 启动步骤 </summary>              <div class='content'>              <ol><li><p>在服务器断电情况下,插入烧录好的U盘启动盘</p><ul><li>usb2.0插入黑色口</li><li>usb3.0插入蓝色口</li><li>不行都试试</li></ul></li><li><p>连接网线</p></li><li><p>插上电源,等待U盘启动盘启动</p></li></ol><div class="note info flat"><p>如果接了电视机或者显示器的,只会显示开机画面logo(不用理会,直接使用ssh工具连接)</p></div><ol start="4"><li><p>用IP扫描工具扫描局域网IP(本文是192.168.101.74)<br><img src="/assets/updata/ip.png" alt="ip扫描工具图片"></p></li><li><p>用SSH连接工具连接服务器的IP(端口号默认为<strong>22</strong>) [默认密码是ubuntu系统]</p></li><li><p>SSH连接服务器后,输入: <strong>df -h</strong> 后回车,有显示:<strong>/dev/sda</strong>,则说明当前是USB启动</p></li></ol>              </div>            </details><h2 id="🔄-系统恢复步骤">🔄 系统恢复步骤</h2><details class="folding-tag" cyan><summary> 手动恢复系统步骤 </summary>              <div class='content'>              <ol><li>在SSH中手动输入以下代码:</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"><span class="built_in">mkdir</span> -p /lsddbr</span><br><span class="line"><span class="built_in">chmod</span> 777 /lsddbr</span><br><span class="line">mount /dev/mmcblk2p17 /lsddbr</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;格式化分区内容，请稍候&quot;</span></span><br><span class="line"><span class="built_in">rm</span> -rf /lsddbr/*</span><br><span class="line"><span class="built_in">cd</span> /lsddbr</span><br></pre></td></tr></table></figure><ol start="2"><li><p>MobaXterm工具左侧切换到 <strong>/lsddbr</strong><br><img src="/assets/updata/ssh.png" alt="ssh链接工具"></p></li><li><p>使用MobaXterm工具上传系统镜像到 /lsddbr中(可点击上传按钮,或直接拖拽到左侧处)</p></li><li><p>等待上传完成后,执行以下代码:</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /lsddbr</span><br><span class="line">tar -zxvf ubuntu20.04.tar.gz</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;解压完成&quot;</span></span><br><span class="line"><span class="built_in">rm</span> -rf ubuntu20.04.tar.gz</span><br><span class="line">umount /dev/mmcblk2p17</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Complete! 请拔下电源后,拔下U盘,再通电开机,启动系统...&quot;</span></span><br></pre></td></tr></table></figure><ol start="5"><li><p>代码执行完成后,按系统提示输入poweroff关机</p></li><li><p>等待<strong>1分钟</strong>后,拔下电源,取下U盘,重新通电开机</p></li><li><p>系统手动恢复结束</p></li></ol>              </div>            </details>]]></content>
-      
-      
-      <categories>
-          
-          <category> 教程 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 教程 </tag>
-            
-            <tag> 系统重装 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>如何安装AList系统</title>
       <link href="/posts/70289010.html"/>
       <url>/posts/70289010.html</url>
@@ -50,6 +23,33 @@
             <tag> 教程 </tag>
             
             <tag> AList </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>H96MAX系统重装教程</title>
+      <link href="/posts/c549160f.html"/>
+      <url>/posts/c549160f.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="🛠️-系统重装准备工作">🛠️ 系统重装准备工作</h2><div class="note info flat"><p>准备工具：</p><ul><li>准备&gt;=8g的U盘一个(也许不止一个，有些U盘识别不好时请更换U盘试下)</li><li>局域网 IP扫描工具</li><li>电脑SSH连接服务器工具 SecureCRT | MobaXterm</li><li>镜像烧录工具 usbit | Win32磁盘映像工具 | balenaEtcher (推荐使用balenaEtcher)</li></ul></div><div class="note primary flat"><p>以上所有文件下载地址: 【软件库 -&gt; 系统重装准备工具】</p></div><h2 id="💿-U盘启动盘镜像下载">💿 U盘启动盘镜像下载</h2><div class="tabs" id="image"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#image-1">注意事项</button></li><li class="tab"><button type="button" data-href="#image-2">下载地址</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="image-1"><ol><li>两种镜像都可以制作U盘启动盘，<strong>与你想要恢复的系统无关，随便选择一个即可</strong></li><li>下载文件后，请提前<strong>解压出img镜像</strong>文件备用</li></ol><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="image-2"><ul><li>Ubuntu镜像</li><li>下载地址: 【软件库 -&gt; U盘启动盘镜像】</li></ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div><h2 id="📥-下载系统镜像">📥 下载系统镜像</h2><div class="note warning flat"><p>下载的系统镜像<strong>无需解压</strong></p></div><p>下载相对应的系统镜像，下载地址: 【软件库 -&gt; 系统盘镜像】</p><h2 id="💽-制作U盘启动盘">💽 制作U盘启动盘</h2><details class="folding-tag" cyan><summary> 使用usbit(USB Image Tool)制作启动盘步骤 </summary>              <div class='content'>              <ol><li><p>插入大于8g的U盘(需要在windows上格式化，格式化格式NTFS/FAT均可，<strong>重要数据请提前保存</strong>)</p></li><li><p>按下图选择U盘图标<br><img src="/assets/updata/u%E7%9B%98.png" alt="u盘启动图片"></p></li><li><p>点击 <strong>Restore</strong>，选择下载好的系统启动盘镜像</p></li><li><p>选择下载好启动镜像img文件后确认，开始烧录U盘启动盘</p></li><li><p>烧录完成后，会弹出格式化，<strong>不要格式化，不要格式化，不要格式化</strong>，点击取消</p></li><li><p>退出U盘</p></li></ol>              </div>            </details><h2 id="🚀-插入U盘启动盘启动进入U盘系统">🚀 插入U盘启动盘启动进入U盘系统</h2><details class="folding-tag" cyan><summary> 启动步骤 </summary>              <div class='content'>              <ol><li><p>在服务器断电情况下,插入烧录好的U盘启动盘</p><ul><li>usb2.0插入黑色口</li><li>usb3.0插入蓝色口</li><li>不行都试试</li></ul></li><li><p>连接网线</p></li><li><p>插上电源,等待U盘启动盘启动</p></li></ol><div class="note info flat"><p>如果接了电视机或者显示器的,只会显示开机画面logo(不用理会,直接使用ssh工具连接)</p></div><ol start="4"><li><p>用IP扫描工具扫描局域网IP(本文是192.168.101.74)<br><img src="/assets/updata/ip.png" alt="ip扫描工具图片"></p></li><li><p>用SSH连接工具连接服务器的IP(端口号默认为<strong>22</strong>) [默认密码是ubuntu系统]</p></li><li><p>SSH连接服务器后,输入: <strong>df -h</strong> 后回车,有显示:<strong>/dev/sda</strong>,则说明当前是USB启动</p></li></ol>              </div>            </details><h2 id="🔄-系统恢复步骤">🔄 系统恢复步骤</h2><details class="folding-tag" cyan><summary> 手动恢复系统步骤 </summary>              <div class='content'>              <ol><li>在SSH中手动输入以下代码:</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /</span><br><span class="line"><span class="built_in">mkdir</span> -p /lsddbr</span><br><span class="line"><span class="built_in">chmod</span> 777 /lsddbr</span><br><span class="line">mount /dev/mmcblk2p17 /lsddbr</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;格式化分区内容，请稍候&quot;</span></span><br><span class="line"><span class="built_in">rm</span> -rf /lsddbr/*</span><br><span class="line"><span class="built_in">cd</span> /lsddbr</span><br></pre></td></tr></table></figure><ol start="2"><li><p>MobaXterm工具左侧切换到 <strong>/lsddbr</strong><br><img src="/assets/updata/ssh.png" alt="ssh链接工具"></p></li><li><p>使用MobaXterm工具上传系统镜像到 /lsddbr中(可点击上传按钮,或直接拖拽到左侧处)</p></li><li><p>等待上传完成后,执行以下代码:</p></li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /lsddbr</span><br><span class="line">tar -zxvf ubuntu20.04.tar.gz</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;解压完成&quot;</span></span><br><span class="line"><span class="built_in">rm</span> -rf ubuntu20.04.tar.gz</span><br><span class="line">umount /dev/mmcblk2p17</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Complete! 请拔下电源后,拔下U盘,再通电开机,启动系统...&quot;</span></span><br></pre></td></tr></table></figure><ol start="5"><li><p>代码执行完成后,按系统提示输入poweroff关机</p></li><li><p>等待<strong>1分钟</strong>后,拔下电源,取下U盘,重新通电开机</p></li><li><p>系统手动恢复结束</p></li></ol>              </div>            </details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+            <tag> 系统重装 </tag>
             
         </tags>
       
